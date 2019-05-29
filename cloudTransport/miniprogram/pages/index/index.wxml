@@ -1,0 +1,67 @@
+<view class="container">
+  <view class="page-section">
+    <map
+      id="myMap"
+      style="width: 100%; height: 500rpx;"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      markers="{{markers}}"
+      show-location
+      bindregionchange="change"
+    >
+      <!-- 标记title -->
+      <cover-view class="map-title one-txt-cut" wx:if="{{centerShow}}">{{tagText}}</cover-view>
+      <!-- 中心点 -->
+      <cover-view class="tag-box" wx:if="{{centerShow}}">
+        <cover-image class="tag" src="../../image/location.png" />
+      </cover-view>
+      <cover-view class='black-bg1' wx:if="{{infoShow}}"></cover-view>
+    </map>
+  </view>
+  <i-cell-group>
+    <i-cell title="{{tagText}}" label="发货位置" bind:click="sendAddress" is-link></i-cell>
+    <i-cell title="{{receiveAddress}}" label="收货位置" bind:click="receiveAddress" is-link ></i-cell>
+    <i-cell title="搬运服务"  label="{{carryLabel}}">
+        <switch slot="footer" bindchange="isCarry" />
+    </i-cell>
+  </i-cell-group>
+  <!-- 价格 -->
+  <view class='price-box'>
+    <view class='price'>
+      <text bindtap='toInstructions'>预计</text><text bindtap='toInstructions' style='font-size:40rpx;font-weight:bold'>{{price}}</text><text bindtap='toInstructions'>元</text><text bindtap='toInstructions'> ></text>
+    </view>
+    <view style='color:gray;'>驾车大概需要<text>{{time}}</text></view>
+    <view style='color:gray'>为您提供60分钟免费装卸时长</view>
+    <!-- 打开填写信息 -->
+    <i-icon class='open-info' bindtap='openInfo' type="document_fill" size="30" color="#19BE6B"/>
+  </view>
+  <!-- 提交 -->
+  <view class='submit'>
+    <form bindsubmit="formSubmit" report-submit="true">
+      <button size='170' class='confirm' formType="submit" bindtap='{{!banTouch ? " ":"getBodyInfo"}}'>提交</button>
+    </form>
+  </view>
+  <!-- 询问服务 -->
+  <view class='black-bg2' wx:if="{{infoShow}}">
+    <view class='person-info'>
+      <view class='info-title'>
+        <text>填写信息</text>
+        <i-icon class='close-info' bindtap='closeInfo' type="offline" size="28" color="#19BE6B"/>
+      </view>
+      <i-panel title="基础用法">
+        <i-input bind:change="changeName" value="{{ name }}" title="联系人" placeholder="姓名" />
+        <i-input bind:change="changeTel" value="{{ tel }}" type="number" title="联系电话" placeholder="手机号" />
+      </i-panel>
+      <picker mode="date" value="{{serviceTime}}" bindchange="bindDateChange">
+        <view class="picker">
+          <text class='picker-title'>上门时间</text><text class='picker-date'>{{serviceTime}}</text>
+        </view>
+      </picker>
+      
+      <view class='confirm-info'>
+        <text class="prompt" wx:if="{{prompt}}">提示：请将以上信息填写完整</text>
+        <i-button bind:click="confirmClick" type="success" shape="circle">确认</i-button>
+      </view>
+    </view>
+  </view>
+</view>

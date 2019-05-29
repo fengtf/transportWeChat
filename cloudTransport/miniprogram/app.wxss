@@ -1,0 +1,10 @@
+/**app.wxss**/
+.container {
+
+}
+/* 单行溢出 */
+.one-txt-cut{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

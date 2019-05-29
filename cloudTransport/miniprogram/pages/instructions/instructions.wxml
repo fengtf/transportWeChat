@@ -1,0 +1,8 @@
+<view class="container">
+  <i-cell-group>
+    <i-cell title="车辆信息" label="{{car}}"></i-cell>
+    <i-cell title="运输价格计算" label="{{price}}"></i-cell>
+    <i-cell title="搬运服务" label="{{handling}}"></i-cell>
+    <i-cell title="其它" label="{{other}}"></i-cell>
+  </i-cell-group>
+</view>
